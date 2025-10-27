@@ -210,7 +210,3 @@ __marimo__/
 
 # __init__.py
 __init__.py
-
-# pytest
-pytest.ini
-requirements.txt
