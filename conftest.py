@@ -1,9 +1,8 @@
 import pytest
-
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOption
-from selenium.webdriver.firefox.options import Options as FFOption
 from selenium.webdriver.edge.options import Options as EdgeOption
+from selenium.webdriver.firefox.options import Options as FFOption
 
 
 def pytest_addoption(parser):
@@ -21,20 +20,26 @@ def browser(request):
         options = ChromeOption()
         if headless:
             options.add_argument("--headless=new")
+        else:
+            options.add_argument("--start-maximized")
         driver = webdriver.Chrome(options=options)
     elif browser_name == "ff":
         options = FFOption()
         if headless:
             options.add_argument("--headless=new")
+        else:
+            options.add_argument("--start-maximized")
         driver = webdriver.Firefox(options=options)
     elif browser_name == 'edge':
         options = EdgeOption()
         if headless:
             options.add_argument("--headless=new")
-        driver = webdriver.Edge(options=options) 
+        else:
+            options.add_argument("--start-maximized")
+        driver = webdriver.Edge(options=options)
     else:
         raise ValueError(f"Driver for {browser_name} not supported")
-    
+
     driver.base_url = base_url
 
     yield driver

@@ -1,55 +1,26 @@
-import pytest
-
-from framework import wait_title, wait_element
-from selenium.webdriver.common.by import By
+from page_objects.main_page import MainPage
 
 
 def test_main_title(browser):
-    browser.get(f'{browser.base_url}')
-    wait_title("PrestaShop", browser)
+    main_page = MainPage(browser)
+    main_page.open_main()
 
+def test_header_elements(browser):
+    main_page = MainPage(browser)
+    main_page.open_main()
+    main_page.check_header_elements()
 
-@pytest.mark.parametrize("header_element", [
-    ("#contact-link"),
-    ("#_desktop_currency_selector"),
-    ("#_desktop_user_info"),
-    ("#category-3"),
-    ("#category-6"),
-    ("#category-9"),
-    ("#search_widget"),
-])
-def test_main_header_top(browser, header_element):
-    browser.get(f'{browser.base_url}')
-    wait_element(header_element, browser)
+def test_products(browser):
+    main_page = MainPage(browser)
+    main_page.open_main()
+    main_page.check_product_blocks()
 
+def test_key_blocks(browser):
+    main_page = MainPage(browser)
+    main_page.open_main()
+    main_page.check_key_blocks()
 
-@pytest.mark.parametrize("products", [
-    ("//*[normalize-space()='Popular Products']"),
-    ("//*[normalize-space()='On sale']"),
-    ("//*[normalize-space()='New products']"),
-])
-def test_main_products(browser, products):
-    browser.get(f'{browser.base_url}')
-    wait_element(products, browser, by=By.XPATH)
-
-
-@pytest.mark.parametrize("block_id", [
-    ("#carousel"),                                   
-    (".banner"),                                      
-    ("#custom-text"),                               
-    ("#blockEmailSubscription_displayFooterBefore"),
-])
-def test_main_page_key_blocks(browser, block_id):
-    browser.get(f'{browser.base_url}')
-    wait_element(block_id, browser)    
-
-
-@pytest.mark.parametrize("footer_element", [
-    ("//*[normalize-space()='Products']"),
-    ("//*[normalize-space()='Our company']"),
-    ("//*[normalize-space()='Your account']"),
-    ("//p[normalize-space()='Store information']"),
-])
-def test_main_footer(browser, footer_element):
-    browser.get(f'{browser.base_url}')
-    wait_element(footer_element, browser, by=By.XPATH)
+def test_footer(browser):
+    main_page = MainPage(browser)
+    main_page.open_main()
+    main_page.check_footer_elements()
