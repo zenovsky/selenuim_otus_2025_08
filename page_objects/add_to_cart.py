@@ -3,13 +3,9 @@ from page_objects.base_page import BasePage
 
 class AddToCart(BasePage):
     PRODUCT = ".thumbnail.product-thumbnail"
-
     PRODUCT_NAME_IN_CARD = ".h1"
-
     ADD_TO_CART_BUTTON = ".btn.btn-primary.add-to-cart"
-
     MODAL_WINDOW_TITLE = ".modal-title.h6.text-sm-center"
-
     PRODUCT_NAME_IN_CART = ".h6.product-name"
 
     def click_product(self):

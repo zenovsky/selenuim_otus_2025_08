@@ -5,23 +5,17 @@ from page_objects.base_page import BasePage
 
 class CreateAccountPage(BasePage):
     PAGE_URL = "/registration"
-
     TITLE = "Registration"
-
     LOGIN_LINK = "a[href$='/login']"
-
     GENDERS_RADIO_BUTTON = [
         "label[for='field-id_gender-1']",
         "label[for='field-id_gender-2']",
     ]
-
     GENDER_IDS = {
         "mr": 1,
         "mrs": 2
     }
-
     GENDER_LABEL_TEMPLATE = "label[for='field-id_gender-{gender_id}']"
-
     FIELDS_MAP = {
         "firstname": "#field-firstname",
         "lastname": "#field-lastname",
@@ -29,17 +23,11 @@ class CreateAccountPage(BasePage):
         "password": "#field-password",
         "birthday": "#field-birthday",
     }
-
     REGISTRATION_CHECKBOX_OFFERS = (By.XPATH, "//input[@name='optin']/ancestor::label[1]")
-
     REGISTRATION_CHECKBOX_TERMS = (By.XPATH, "//input[@name='psgdpr']/ancestor::label[1]")
-
     REGISTRATION_CHECKBOX_NEWS = (By.XPATH, "//input[@name='newsletter']/ancestor::label[1]")
-
     REGISTRATION_CHECKBOX_PRIVACY = (By.XPATH, "//input[@name='customer_privacy']/ancestor::label[1]")
-
     SAVE_ACCOUNT_BUTTON = "button[data-link-action='save-customer']"
-
 
     def open_create_account(self):
         self.open(self.PAGE_URL)

@@ -5,42 +5,31 @@ from page_objects.base_page import BasePage
 
 class CatalogPage(BasePage):
     PAGE_URL = "/2-home"
-
     TITLE = "Home"
-
     CATEGORIES_LINKS = [
         (By.CSS_SELECTOR, "a[href$='/3-clothes']"),
         (By.CSS_SELECTOR, "a[href$='/6-accessories']"),
         (By.CSS_SELECTOR, "a[href$='/9-art']"),
     ]
-
     FILTER_SUPPLIERS_LINKS = [
         (By.CSS_SELECTOR, "a[href$='/supplier/2-accessories-supplier']"),
         (By.CSS_SELECTOR, "a[href$='/supplier/1-fashion-supplier']"),
     ]
-
     FILTER_BRANDS_LINKS = [
         (By.CSS_SELECTOR, "a[href$='/brands']"),
         (By.CSS_SELECTOR, "a[href$='/brand/2-graphic-corner']"),
         (By.CSS_SELECTOR, "a[href$='/brand/1-studio-design']"),
     ]
-
     PRODUCT_LIST_CONTENT = [
         ".btn-unstyle.select-title",
         ".wishlist-button-add",
         ".next.js-search-link",
     ]
-
     FILTER_BRANDS = "#search_filters_brands"
-
     FILTER_SUPPLIERS = "#search_filters_suppliers"
-
     SEARCH_FILTERS = "#search_filters"
-
     SUBCATEGORIES = "#subcategories"
-
     PRODUCT_LIST = ".products.row"
-
 
     def open_catalog(self):
         self.open(self.PAGE_URL)

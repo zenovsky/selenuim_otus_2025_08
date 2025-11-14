@@ -5,18 +5,14 @@ from page_objects.base_page import BasePage
 
 class ProductCardPage(BasePage):
     PAGE_URL = "/13-brown-bear-vector-graphics.html"
-
     TITLE = "Brown bear - Vector graphics"
-
     PRODUCT_IMAGE = "[src$='/brown-bear-vector-graphics.jpg']"
-
     PAGE_CSS_ELEMENTS = [
         ".current-price-value",
         ".btn.btn-primary.add-to-cart",
         "#quantity_wanted",
         ".wishlist-button-add",
     ]
-
     PAGE_XPATH_ELEMENTS = [
         (By.XPATH, "//*[normalize-space()='Description']"),
         (By.XPATH, "//*[normalize-space()='Product Details']"),

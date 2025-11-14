@@ -6,37 +6,21 @@ from page_objects.base_page import BasePage
 
 class AdminCatalogProductsPage(BasePage):
     ADD_NEW_PRODUCT_BUTTON = "#page-header-desc-configuration-add"
-
     MODAL_ADD_PRODUCT_IFRAME = (By.NAME, "modal-create-product-iframe")
-
     MODAL_ADD_NEW_PRODUCT_BUTTON = "#create_product_create"
-
     PRODUCT_FILTER_SEARCH_INPUT = "#product_name"
-
     PRODUCT_FILTER_SEARCH_BUTTON = ".btn.btn-primary.grid-search-button"
-
     PRODUCT_BULK_CHECKBOX = ".bulk_action-type.column-bulk"
-
     PRODUCT_BULK_ACTION_DROPDOWN = ".btn.btn-outline-secondary.dropdown-toggle.js-bulk-actions-btn"
-
     PRODUCT_BULK_ACTION_DELETE = "#product_grid_bulk_action_bulk_delete_ajax"
-
     MODAL_BULK_ACTION_DELETE_BUTTON = ".btn.btn-primary.btn-lg.btn-confirm-submit"
-
     MODAL_BULK_ACTION_CLOSE_BUTTON = ".btn.btn-primary.btn-lg.close-modal-button"
-
     PRODUCT_DELETE_SUCCESS_ALERT = (By.XPATH, "//div[@class='alert-text']/p[contains(text(), 'Successful deletion')]")
-
     PRODUCT_HEADER_NAME = "#product_header_name_1"
-
     PRODUCT_PRICING_TAB= "#product_pricing-tab-nav"
-
     RETAIL_PRICE_INPUT = "#product_pricing_retail_price_price_tax_excluded"
-
     PRODUCT_SAVE_BUTTON = "#product_footer_save"
-
     PRODUCT_ADD_SUCCESS_ALERT = (By.XPATH, "//div[@class='alert-text']/p[contains(text(), 'Successful update')]")
-
 
     def click_add_new_product_button(self):
         self.wait_element(self.ADD_NEW_PRODUCT_BUTTON).click()

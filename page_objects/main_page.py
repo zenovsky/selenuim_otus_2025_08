@@ -5,7 +5,6 @@ from page_objects.base_page import BasePage
 
 class MainPage(BasePage):
     TITLE = "PrestaShop"
-
     HEADER_ELEMENTS = [
         "#contact-link",
         "#_desktop_currency_selector",
@@ -15,30 +14,24 @@ class MainPage(BasePage):
         "#category-9",
         "#search_widget",
     ]
-
     USER_INFO_LINK = "a[href$='/my-account']"
-
-
     PRODUCT_BLOCKS = [
         (By.XPATH, "//*[normalize-space()='Popular Products']"),
         (By.XPATH, "//*[normalize-space()='On sale']"),
         (By.XPATH, "//*[normalize-space()='New products']"),
     ]
-
     KEY_BLOCKS = [
         "#carousel",
         ".banner",
         "#custom-text",
         "#blockEmailSubscription_displayFooterBefore",
     ]
-
     FOOTER_ELEMENTS = [
         (By.XPATH, "//*[normalize-space()='Products']"),
         (By.XPATH, "//*[normalize-space()='Our company']"),
         (By.XPATH, "//*[normalize-space()='Your account']"),
         (By.XPATH, "//p[normalize-space()='Store information']"),
     ]
-
 
     def open_main(self):
         self.open("")

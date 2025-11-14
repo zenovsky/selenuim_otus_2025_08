@@ -5,21 +5,13 @@ from page_objects.base_page import BasePage
 
 class AdminPage(BasePage):
     TITLE = "Dashboard • PrestaShop"
-
     ADMIN_ICON = ".employee_name.dropdown-toggle"
-
     ADMIN_LOGOUT = "#header_logout"
-
     ADMIN_HEADER_SEARCH = "#bo_query"
-
     ADMIN_HEADER_SEARCH_DROPDOWN = (By.XPATH, "//button[contains(text(), 'Everywhere')]")
-
     ADMIN_HEADER_SEARCH_DROPDOWN_CATALOG = 'a[data-item="Catalog"]'
-
     ADMIN_CATALOG_SUBMENU = "#subtab-AdminCatalog"
-
     ADMIN_CATALOG_PRODUCTS = "#subtab-AdminProducts"
-
 
     def open_admin_page(self):
         self.open(self.PAGE_URL)

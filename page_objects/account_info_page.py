@@ -3,7 +3,6 @@ from page_objects.base_page import BasePage
 
 class AccountInfoPage(BasePage):
     ACCOUNT_INFORMATION_LINK = "#identity-link"
-
     FIELDS_MAP = {
         "firstname": "#field-firstname",
         "lastname": "#field-lastname",

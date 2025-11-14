@@ -3,13 +3,9 @@ from page_objects.base_page import BasePage
 
 class CurrencyChange(BasePage):
     PRICE_ELEMENT = ".product-miniature:first-child .price"
-
     CURRENCY_ELEMENT = ".hidden-sm-down.btn-unstyle"
-
     PRICE_EUR = "a[title='Euro]"
-
     PRICE_DOLLAR = "a[title='US Dollar']"
-
 
     def get_price_text(self):
         price = self.wait_element(self.PRICE_ELEMENT)

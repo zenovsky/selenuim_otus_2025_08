@@ -5,9 +5,7 @@ from page_objects.base_page import BasePage
 
 class AdminLoginPage(BasePage):
     PAGE_URL = "/administration"
-
     TITLE = "PrestaShop"
-
     PAGE_CSS_ELEMENTS = [
         "#login_form",
         "#email",
@@ -15,7 +13,6 @@ class AdminLoginPage(BasePage):
         "#submit_login",
         "#forgot-password-link",
     ]
-
     LOGIN_STAY_CHECKBOX = (By.XPATH, "//*[normalize-space()='Stay logged in']")
 
 
