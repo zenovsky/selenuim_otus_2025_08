@@ -14,4 +14,3 @@ def test_currency_change_on_main_page(browser):
         "Цены не изменились после переключения валюты!"
     assert "€" in price_euro, "Цена не содержит символ EUR (€)"
     assert "€" not in price_dollar, "Символ валюты не изменился на USD."
-

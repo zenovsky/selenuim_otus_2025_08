@@ -1,74 +1,52 @@
-import pytest
-
-from framework import wait_title, wait_element
-from selenium.webdriver.common.by import By
+from page_objects.catalog_page import CatalogPage
 
 
 def test_catalog_title(browser):
-    browser.get(f'{browser.base_url}/2-home')
-    wait_title("Home", browser)
+    catalog_page = CatalogPage(browser)
+    catalog_page.open_catalog()
 
+def test_catalog_categories_links(browser):
+    catalog_page = CatalogPage(browser)
+    catalog_page.open_catalog()
+    catalog_page.check_categories_links()
 
-@pytest.mark.parametrize("href_suffix", [
-    ("/3-clothes"),
-    ("/6-accessories"),
-    ("/9-art"),
-])
-def test_catalog_categories_links(browser, href_suffix):
-    browser.get(f'{browser.base_url}/2-home')
-    wait_element(f"a[href$='{href_suffix}']", browser)
-
- 
 def test_catalog_filters_suppliers(browser):
-    browser.get(f'{browser.base_url}/2-home')
-    wait_element("#search_filters_suppliers", browser)
+    catalog_page = CatalogPage(browser)
+    catalog_page.open_catalog()
+    catalog_page.check_filters_suppliers()
 
+def test_catalog_filters_suppliers_links(browser):
+    catalog_page = CatalogPage(browser)
+    catalog_page.open_catalog()
+    catalog_page.check_filters_suppliers_links()
 
-@pytest.mark.parametrize("href_suffix", [
-    ("/supplier/2-accessories-supplier"),
-    ("/supplier/1-fashion-supplier"),
-])
-def test_catalog_filters_suppliers_links(browser, href_suffix):
-    browser.get(f'{browser.base_url}/2-home')
-    wait_element(f"a[href$='{href_suffix}']", browser)    
-
-  
 def test_catalog_filters_brands(browser):
-    browser.get(f'{browser.base_url}/2-home')
-    wait_element("#search_filters_brands", browser)
+    catalog_page = CatalogPage(browser)
+    catalog_page.open_catalog()
+    catalog_page.check_filters_brands()
 
-
-@pytest.mark.parametrize("href_suffix", [
-    ("/brands"),
-    ("/brand/2-graphic-corner"),
-    ("/brand/1-studio-design"),
-])
-def test_catalog_filters_brands_links(browser, href_suffix):
-    browser.get(f'{browser.base_url}/2-home')
-    wait_element(f"a[href$='{href_suffix}']", browser)
-
+def test_catalog_filters_brands_links(browser):
+    catalog_page = CatalogPage(browser)
+    catalog_page.open_catalog()
+    catalog_page.check_filters_brands_links()
 
 def test_catalog_search_filters(browser):
-    browser.get(f'{browser.base_url}/2-home')
-    wait_element("#search_filters", browser)
-
+    catalog_page = CatalogPage(browser)
+    catalog_page.open_catalog()
+    catalog_page.check_search_filters()
 
 def test_catalog_subcategories(browser):
-    browser.get(f'{browser.base_url}/2-home')
-    wait_element("#subcategories", browser) 
-
+    catalog_page = CatalogPage(browser)
+    catalog_page.open_catalog()
+    catalog_page.check_subcategories()
 
 def test_catalog_products_list(browser):
-    browser.get(f'{browser.base_url}/2-home')
-    wait_element(".products.row", browser)
+    catalog_page = CatalogPage(browser)
+    catalog_page.open_catalog()
+    catalog_page.check_products_list()
 
-
-@pytest.mark.parametrize("product_list_feature", [
-    (".btn-unstyle.select-title"),
-    (".wishlist-button-add"),
-    (".next.js-search-link"),
-])
-def test_catalog_products_list_content(browser, product_list_feature):
-    browser.get(f'{browser.base_url}/2-home')
-    wait_element(product_list_feature, browser)
+def test_catalog_products_list_content(browser):
+    catalog_page = CatalogPage(browser)
+    catalog_page.open_catalog()
+    catalog_page.check_products_list_content()
 

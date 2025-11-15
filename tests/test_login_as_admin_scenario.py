@@ -1,19 +1,22 @@
-from framework import wait_title, wait_element
-from selenium.webdriver.common.by import By
 from config import ADMIN_EMAIL, ADMIN_PASSWORD
+
+from page_objects.admin_dashboard_page import AdminPage
+from page_objects.admin_login_page import AdminLoginPage
 
 
 def test_admin_login_logout_cycle(browser):
-    browser.get(f'{browser.base_url}/administration')
-    wait_title("PrestaShop", browser)
-    email_input = wait_element("#email", browser) 
-    email_input.send_keys(ADMIN_EMAIL)
-    password_input = wait_element("#passwd", browser) 
-    password_input.send_keys(ADMIN_PASSWORD) 
-    wait_element("#submit_login", browser).click()
-    wait_title("Dashboard • PrestaShop", browser)
-    wait_element(".employee_name.dropdown-toggle", browser).click()
-    wait_element("#header_logout", browser).click()
-    wait_title("PrestaShop", browser)
-    
+    admin_login_page = AdminLoginPage(browser)
+    admin_login_page.open_admin_login()
+    admin_login_page.click_email_filed()
+    admin_login_page.fill_email_form(ADMIN_EMAIL)
+    admin_login_page.click_passwd_filed()
+    admin_login_page.fill_passwd_form(ADMIN_PASSWORD)
+    admin_login_page.click_login()
+
+    admin_page = AdminPage(browser)
+    admin_page.check_admin_page_title()
+    admin_page.click_admin_dropdown_toggle()
+    admin_page.click_admin_logout_button()
+    admin_login_page.check_admin_login_title()
+
 
