@@ -1,9 +1,18 @@
+import logging
+
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOption
 from selenium.webdriver.edge.options import Options as EdgeOption
 from selenium.webdriver.firefox.options import Options as FFOption
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler("test.log")
+    ]
+)
 
 def pytest_addoption(parser):
     parser.addoption("--browser", default='ch')

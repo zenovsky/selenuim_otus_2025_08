@@ -1,16 +1,31 @@
-from page_objects.admin_login_page import AdminLoginPage
+import allure
+
+from page_objects.login_admin_page import AdminLoginPage
 
 
+@allure.epic("Страница логина администратора")
+@allure.feature("Загрузка страницы логина администратора")
+@allure.story("Проверка заголовка страницы логина администратора")
+@allure.severity(allure.severity_level.CRITICAL)
 def test_admin_login_title(browser):
-    admin_login_page = AdminLoginPage(browser)
-    admin_login_page.open_admin_login()
+    admin_login = AdminLoginPage(browser)
+    admin_login.open_admin_login()
+    admin_login.check_admin_login_title()
 
+@allure.epic("Страница логина администратора")
+@allure.feature("Загрузка страницы логина администратора")
+@allure.story("Проверка отображения кнопки 'Оставаться в системе'")
+@allure.severity(allure.severity_level.CRITICAL)
 def test_admin_stay_login(browser):
-    admin_login_page = AdminLoginPage(browser)
-    admin_login_page.open_admin_login()
-    admin_login_page.check_login_stay_checkbox()
+    admin_login = AdminLoginPage(browser)
+    admin_login.open_admin_login()
+    admin_login.check_login_stay_checkbox()
 
+@allure.epic("Страница логина администратора")
+@allure.feature("Загрузка страницы логина администратора")
+@allure.story("Проверка отображения веб-элементов страницы логина администратора")
+@allure.severity(allure.severity_level.CRITICAL)
 def test_admin_css_elements(browser):
-    admin_login_page = AdminLoginPage(browser)
-    admin_login_page.open_admin_login()
-    admin_login_page.check_page_css_elements()
+    admin_login = AdminLoginPage(browser)
+    admin_login.open_admin_login()
+    admin_login.check_page_css_elements()

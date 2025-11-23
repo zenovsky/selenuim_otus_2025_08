@@ -211,3 +211,7 @@ __marimo__/
 
 # __init__.py
 __init__.py
+
+# allure 
+allure-report
+allure-results

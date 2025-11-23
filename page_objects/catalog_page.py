@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 
 from page_objects.base_page import BasePage
+from utils.decorators import allure_attach_on_fail, allure_step, log_action
 
 
 class CatalogPage(BasePage):
@@ -31,37 +32,74 @@ class CatalogPage(BasePage):
     SUBCATEGORIES = "#subcategories"
     PRODUCT_LIST = ".products.row"
 
+    @allure_attach_on_fail
+    @log_action
+    @allure_step("Открыть страницу каталога")
     def open_catalog(self):
         self.open(self.PAGE_URL)
         self.wait_title(self.TITLE)
 
+    @allure_attach_on_fail
+    @log_action
+    @allure_step("Проверить заголовок страницы каталога")
+    def check_catalog_title(self):
+        self.open(self.PAGE_URL)
+        self.wait_title(self.TITLE)
+
+    allure_attach_on_fail
+    @log_action
+    @allure_step("Проверить наличие выбора категорий каталога")
     def check_categories_links(self):
         for by, selector in self.CATEGORIES_LINKS:
             self.wait_element(selector, by=by)
 
+    @allure_attach_on_fail
+    @log_action
+    @allure_step("Проверить наличие фильтра по поставщикам")
     def check_filters_suppliers(self):
         self.wait_element(self.FILTER_SUPPLIERS)
 
+    @allure_attach_on_fail
+    @log_action
+    @allure_step("Проверить наличие выбора поставщиков")
     def check_filters_suppliers_links(self):
         for by, selector in self.FILTER_SUPPLIERS_LINKS:
             self.wait_element(selector, by=by)
 
+    @allure_attach_on_fail
+    @log_action
+    @allure_step("Проверить наличие фильтра по брендам")
     def check_filters_brands(self):
         self.wait_element(self.FILTER_BRANDS)
 
+    @allure_attach_on_fail
+    @log_action
+    @allure_step("Проверить наличие выбора брендов")
     def check_filters_brands_links(self):
         for by, selector in self.FILTER_BRANDS_LINKS:
             self.wait_element(selector, by=by)
 
+    @allure_attach_on_fail
+    @log_action
+    @allure_step("Проверить наличие фильтров поиска")
     def check_search_filters(self):
         self.wait_element(self.SEARCH_FILTERS)
 
+    @allure_attach_on_fail
+    @log_action
+    @allure_step("Проверить наличие подкатегорий")
     def check_subcategories(self):
         self.wait_element(self.SUBCATEGORIES)
 
+    @allure_attach_on_fail
+    @log_action
+    @allure_step("Проверить наличие списка товаров")
     def check_products_list(self):
         self.wait_element(self.PRODUCT_LIST)
 
+    @allure_attach_on_fail
+    @log_action
+    @allure_step("Проверить наличие основного контента на странице")
     def check_products_list_content(self):
         for selector in self.PRODUCT_LIST_CONTENT:
             self.wait_element(selector)
