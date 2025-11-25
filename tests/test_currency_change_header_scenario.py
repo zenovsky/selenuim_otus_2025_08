@@ -1,14 +1,21 @@
+import allure
+
 from page_objects.currency_change import CurrencyChange
 from page_objects.main_page import MainPage
 
 
+@allure.epic("Главная страница")
+@allure.feature("Смена валюты")
+@allure.story("Проверка смены валюты из хэдера")
+@allure.severity(allure.severity_level.CRITICAL)
 def test_currency_change_on_main_page(browser):
     main_page = MainPage(browser)
     main_page.open_main()
+
     currency_change = CurrencyChange(browser)
     price_euro = currency_change.get_price_text()
     currency_change.click_currency_dropdown()
-    currency_change.select_dollar()
+    currency_change.select_currency(currency_change.PRICE_DOLLAR)
     price_dollar = currency_change.get_price_text()
     assert price_euro != price_dollar, \
         "Цены не изменились после переключения валюты!"
