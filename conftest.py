@@ -27,15 +27,20 @@ def browser(request):
 
     if browser_name == "ch":
         options = ChromeOption()
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
         if headless:
             options.add_argument("--headless=new")
+            options.add_argument("--window-size=1920,1080")
         else:
             options.add_argument("--start-maximized")
         driver = webdriver.Chrome(options=options)
     elif browser_name == "ff":
         options = FFOption()
         if headless:
-            options.add_argument("--headless=new")
+            options.add_argument("--headless")
+            options.add_argument("--width=1920")
+            options.add_argument("--height=1080")
         else:
             options.add_argument("--start-maximized")
         driver = webdriver.Firefox(options=options)
@@ -43,6 +48,7 @@ def browser(request):
         options = EdgeOption()
         if headless:
             options.add_argument("--headless=new")
+            options.add_argument("--window-size=1920,1080")
         else:
             options.add_argument("--start-maximized")
         driver = webdriver.Edge(options=options)
