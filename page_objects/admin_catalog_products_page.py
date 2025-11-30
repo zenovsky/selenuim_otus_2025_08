@@ -93,7 +93,8 @@ class AdminCatalogProductsPage(BasePage):
     @log_action
     @allure_step("Нажать на кнопку добавления нового товара")
     def click_modal_add_new_product_button(self):
-        self.wait_element(self.MODAL_ADD_NEW_PRODUCT_BUTTON).click()
+        button = self.wait_element(self.MODAL_ADD_NEW_PRODUCT_BUTTON)
+        self.driver.execute_script("arguments[0].click();", button)
 
     @allure_attach_on_fail
     @log_action

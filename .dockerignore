@@ -1,0 +1,33 @@
+# Version control
+.gitignore
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Python
+__pycache__
+*.pyc
+.pytest_cache
+.venv
+venv
+ruff
+.ruff
+.ruff_cache
+
+
+# Logs
+*.log
+logs/
+
+# Test artifacts
+allure-results/
+allure-report/
+
+# Documentation
+README.md
+
+# Secrets 
+.env
