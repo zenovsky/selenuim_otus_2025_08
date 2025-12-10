@@ -1,0 +1,99 @@
+services:
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+      PMA_USER: root
+      PMA_PASSWORD: admin
+    restart: unless-stopped
+    ports:
+      - '8888:80'
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:5.7
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: prestashop
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-padmin"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - db_data:/var/lib/mysql
+
+  prestashop:
+    image: prestashop/prestashop:latest
+    container_name: prestashop
+    restart: always
+    ports:
+      - '8081:80'
+    environment:
+      DB_SERVER: db
+      DB_NAME: prestashop
+      DB_USER: root
+      DB_PASSWORD: admin
+      DB_PREFIX: ps_
+      PS_INSTALL_AUTO: 1
+      PS_LANGUAGE: en
+      PS_COUNTRY: US
+      ADMIN_MAIL: admin@example.com
+      ADMIN_PASSWD: Admin123!
+      PS_FOLDER_ADMIN: administration
+      PS_DOMAIN: prestashop
+    healthcheck:
+      test: ["CMD", "curl", "-f", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - ps_data:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+
+  tests:
+    image: prestashop_tests:1.2.4
+    container_name: prestashop_tests_runner
+    depends_on:
+      prestashop:
+        condition: service_started
+    volumes:
+      - ${PWD}/allure-results:/app/allure-results 
+      - ${PWD}/.env:/app/.env:ro
+      - ps_data:/var/www/html_site
+    environment:
+      HUB_EXECUTOR: nginx
+      APP_URL: http://prestashop
+      BROWSER_NAME: ch
+      BROWSER_VERSION: 128.0    
+    command: >
+      /bin/sh -c "
+      echo 'Waiting 240 seconds for PrestaShop to install/initialize...' && sleep 240;
+      echo 'Force removing install folder...' && rm -rf /var/www/html_site/install;
+      pytest 
+      --browser $${BROWSER_NAME} 
+      --url $${APP_URL} 
+      --browser_version $${BROWSER_VERSION} 
+      --executor $${HUB_EXECUTOR}
+      "
+
+volumes:
+  db_data:
+    driver: local
+  ps_data:
+    driver: local
+
+networks:
+  default:
+    name: selenoid1
+    external: true
