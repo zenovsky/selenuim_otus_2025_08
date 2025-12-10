@@ -1,6 +1,6 @@
 import logging
-import allure
 
+import allure
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOption
@@ -39,12 +39,12 @@ def browser(request):
         executor_url = f"http://{host}/wd/hub"
 
         driver = _selenoid_driver(
-            browser_name=browser_name, 
-            executor_url=executor_url, 
-            vnc=vnc, 
+            browser_name=browser_name,
+            executor_url=executor_url,
+            vnc=vnc,
             video=video,
             version=version
-        )        
+        )
     else:
         driver = _local_driver(browser_name, headless)
 
@@ -54,7 +54,7 @@ def browser(request):
 
     driver.quit()
 
-def _local_driver(browser_name, headless):         
+def _local_driver(browser_name, headless):
     if browser_name == "ch":
         options = ChromeOption()
         options.add_argument("--no-sandbox")
@@ -65,7 +65,7 @@ def _local_driver(browser_name, headless):
         else:
             options.add_argument("--start-maximized")
         return webdriver.Chrome(options=options)
-    elif browser_name == "ff":
+    if browser_name == "ff":
         options = FFOption()
         if headless:
             options.add_argument("--headless")
@@ -74,7 +74,7 @@ def _local_driver(browser_name, headless):
         else:
             options.add_argument("--start-maximized")
         return webdriver.Firefox(options=options)
-    elif browser_name == 'edge':
+    if browser_name == 'edge':
         options = EdgeOption()
         if headless:
             options.add_argument("--headless=new")
@@ -82,9 +82,8 @@ def _local_driver(browser_name, headless):
         else:
             options.add_argument("--start-maximized")
         return webdriver.Edge(options=options)
-    else:
-        raise ValueError(f"Driver for {browser_name} not supported")
-    
+    raise ValueError(f"Driver for {browser_name} not supported")
+
 def _selenoid_driver(browser_name, executor_url, vnc=True, video=False, version=None):
     options = None
     if browser_name == "ch":
@@ -100,10 +99,10 @@ def _selenoid_driver(browser_name, executor_url, vnc=True, video=False, version=
         options.add_argument("--start-maximized")
     else:
         raise ValueError(f"Driver for {browser_name} not supported in Selenoid configuration")
-    
+
     selenoid_capabilities = {
         "enableVNC": vnc,
-        "enableVideo": video 
+        "enableVideo": video
     }
 
     options.set_capability("selenoid:options", selenoid_capabilities)
@@ -115,9 +114,9 @@ def _selenoid_driver(browser_name, executor_url, vnc=True, video=False, version=
         command_executor=executor_url,
         options=options
     )
-    
+
     return driver
 
 def pytest_runtest_call(item):
     browser_name = item.config.getoption("--browser")
-    allure.dynamic.title(f"{item.name} [{browser_name}]")  
+    allure.dynamic.title(f"{item.name} [{browser_name}]")
