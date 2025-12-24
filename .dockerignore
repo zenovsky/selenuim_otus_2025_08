@@ -25,6 +25,8 @@ logs/
 # Test artifacts
 allure-results/
 allure-report/
+allure-report
+allure-results
 
 # Documentation
 README.md
