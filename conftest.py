@@ -115,7 +115,7 @@ def _selenoid_driver(browser_name, executor_url, vnc=True, video=False, version=
         options=options
     )
 
-    return driver
+    return driver # noqa: RET504
 
 def pytest_runtest_call(item):
     browser_name = item.config.getoption("--browser")
