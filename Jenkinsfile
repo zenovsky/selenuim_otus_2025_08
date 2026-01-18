@@ -18,7 +18,7 @@ pipeline {
 
         stage('Prepare Environment') {
             steps {
-                sh 'docker-compose up -d db prestashop'
+                sh 'docker compose up -d db prestashop'
             }
         }
 
