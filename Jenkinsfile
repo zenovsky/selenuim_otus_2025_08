@@ -21,7 +21,7 @@ pipeline {
         steps {
             script {
                 echo "Проверка линтером Ruff..."
-                sh "docker run --rm -v ${WORKSPACE}:/app -w /app python:3.11-slim /bin/sh -c 'pip install ruff && ruff check .'"
+                sh "docker run --rm -v \$(pwd):/app -w /app astral-sh/ruff:latest ruff check ."
             }
         }
     }    
