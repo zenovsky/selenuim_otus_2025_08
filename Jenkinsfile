@@ -21,7 +21,7 @@ pipeline {
             steps {
                 echo 'Установка зависимостей...'
                 sh 'python3 -m venv venv'
-                sh '. venv/bin/activate'
+                sh 'source venv/bin/activate'
                 sh 'pip install -r requirements.txt'
             }
         }
@@ -30,7 +30,7 @@ pipeline {
         steps {
             script {
                 echo "Проверка линтером Ruff..."
-                sh '. venv/bin/activate'
+                sh 'source venv/bin/activate'
                 sh 'ruff check .'
             }
         }
