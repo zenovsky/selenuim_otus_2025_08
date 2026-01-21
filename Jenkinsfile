@@ -17,12 +17,21 @@ pipeline {
             }
         }
 
+        stage('Setup') {
+            steps {
+                echo 'Установка зависимостей...'
+                sh 'python3 -m venv venv'
+                sh '. venv/bin/activate'
+                sh 'pip install -r requirements.txt'
+            }
+        }
+    
     stage('Linting') {
         steps {
             script {
                 echo "Проверка линтером Ruff..."
-                sh 'pwd && ls -la'
-                sh "docker run --rm -v ${WORKSPACE}:/app -w /app ghcr.io/astral-sh/ruff:latest check config.py conftest.py page_objects tests utils"
+                sh '. venv/bin/activate'
+                sh 'ruff check .'
             }
         }
     }    
