@@ -20,14 +20,20 @@ pipeline {
     stage('Linting') {
         steps {
             script {
-                echo "Проверка линтером Ruff..."
-                sh 'python3 -m venv venv'
-                sh '.venv/bin/pip install ruff'
-                sh '.venv/bin/ruff check .'
+            echo "Проверка линтером Ruff..."
+                try {
+                sh '''
+                    python3 -m venv venv
+                    ./venv/bin/python3 -m pip install ruff
+                    ./venv/bin/python3 -m ruff check .
+                '''
+                } finally {
+                echo "Очистка виртуального окружения..."
                 sh 'rm -rf venv'
+                }
             }
         }
-    }    
+    }
 
         stage('Prepare Environment') {
             steps {
