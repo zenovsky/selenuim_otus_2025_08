@@ -21,7 +21,7 @@ pipeline {
         steps {
             script {
                 echo "Проверка линтером Ruff..."
-                sh "docker run --rm -v \$(pwd):/app -w /app ghcr.io/astral-sh/ruff:latest check ."
+                sh "docker run --rm -v ${WORKSPACE}:/app -w /app ghcr.io/astral-sh/ruff:latest check ."
             }
         }
     }    
