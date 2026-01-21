@@ -45,6 +45,7 @@ class AdminPage(BasePage):
         self.wait_element(self.ADMIN_LOGOUT).click()
 
     allure_attach_on_fail
+
     @log_action
     @allure_step("Проверить наличие сабменю каталога")
     def check_admin_catalog_submenu(self):

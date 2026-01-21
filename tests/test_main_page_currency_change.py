@@ -17,8 +17,6 @@ def test_currency_change_on_main_page(browser):
     currency_change.click_currency_dropdown()
     currency_change.select_currency(currency_change.PRICE_DOLLAR)
     price_dollar = currency_change.get_price_text()
-    assert price_euro != price_dollar, \
-        "Цены не изменились после переключения валюты!"
+    assert price_euro != price_dollar, "Цены не изменились после переключения валюты!"
     assert "€" in price_euro, "Цена не содержит символ EUR (€)"
     assert "€" not in price_dollar, "Символ валюты не изменился на USD."
-

@@ -23,7 +23,3 @@ def test_admin_login_logout_cycle(browser):
 
     admin_login = AdminLoginPage(browser)
     admin_login.check_admin_login_title()
-
-
-
-

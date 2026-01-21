@@ -17,10 +17,19 @@ pipeline {
             }
         }
 
+    stage('Linting') {
+        steps {
+            script {
+                echo "Проверка линтером Ruff..."
+                sh "docker run --rm -v ${WORKSPACE}:/app -w /app python:3.11-slim /bin/sh -c 'pip install ruff && ruff check .'"
+            }
+        }
+    }    
+
         stage('Prepare Environment') {
             steps {
                 echo 'Запуск сервисов через Docker Compose...'
-                sh 'docker-compose down -v || true'
+                sh 'docker compose down -v || true'
                 sh 'docker compose up -d db prestashop'
             }
         }
@@ -62,7 +71,7 @@ pipeline {
                             sh "docker cp ${testContainer}:/app/allure-results/. ./allure-results/ || true"
                             echo "Удаляем контейнер с тестами, останавливаем сервисы..."
                             sh "docker rm -f ${testContainer} || true"
-                            sh "docker-compose down -v || true"
+                            sh "docker compose down -v || true"
                         }
                     }
                 }

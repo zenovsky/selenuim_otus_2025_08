@@ -12,10 +12,7 @@ class CreateAccountPage(BasePage):
         "label[for='field-id_gender-1']",
         "label[for='field-id_gender-2']",
     ]
-    GENDER_IDS = {
-        "mr": 1,
-        "mrs": 2
-    }
+    GENDER_IDS = {"mr": 1, "mrs": 2}
     GENDER_LABEL_TEMPLATE = "label[for='field-id_gender-{gender_id}']"
     FIELDS_MAP = {
         "firstname": "#field-firstname",
@@ -65,8 +62,9 @@ class CreateAccountPage(BasePage):
             try:
                 self.wait_element(selector)
             except Exception:
-                raise AssertionError(f"Поле регистрации '{field_name}' "
-                                     f"с селектором '{selector}' не найдено или не видимо!")
+                raise AssertionError(
+                    f"Поле регистрации '{field_name}' с селектором '{selector}' не найдено или не видимо!"
+                )
 
     @allure_attach_on_fail
     @log_action

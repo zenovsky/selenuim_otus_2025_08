@@ -51,10 +51,7 @@ def log_action(func):
 
         masked_args, masked_kwargs = mask_args(func, args, kwargs)
 
-        args_repr = ", ".join(
-            [repr(a) for a in masked_args] +
-            [f"{k}={v!r}" for k, v in masked_kwargs.items()]
-        )
+        args_repr = ", ".join([repr(a) for a in masked_args] + [f"{k}={v!r}" for k, v in masked_kwargs.items()])
 
         logger.info(f"Calling: {func.__name__}({args_repr})")
 
@@ -75,13 +72,9 @@ def allure_step(title=None):
 
         @wraps(func)
         def wrapper(self, *args, **kwargs):
-
             masked_args, masked_kwargs = mask_args(func, args, kwargs)
 
-            params = ", ".join(
-                [repr(a) for a in masked_args] +
-                [f"{k}={v!r}" for k, v in masked_kwargs.items()]
-            )
+            params = ", ".join([repr(a) for a in masked_args] + [f"{k}={v!r}" for k, v in masked_kwargs.items()])
 
             with allure.step(f"{step_title}({params})"):
                 return func(self, *args, **kwargs)
@@ -99,9 +92,7 @@ def allure_attach_on_fail(func):
         except Exception as e:
             try:
                 allure.attach(
-                    self.driver.get_screenshot_as_png(),
-                    name="Screenshot",
-                    attachment_type=allure.attachment_type.PNG
+                    self.driver.get_screenshot_as_png(), name="Screenshot", attachment_type=allure.attachment_type.PNG
                 )
             except Exception:
                 pass

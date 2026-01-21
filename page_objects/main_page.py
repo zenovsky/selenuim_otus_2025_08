@@ -80,7 +80,3 @@ class MainPage(BasePage):
     @allure_step("Нажать кнопку информации о пользователе")
     def click_user_info(self):
         self.wait_element(self.USER_INFO_LINK).click()
-
-
-
-

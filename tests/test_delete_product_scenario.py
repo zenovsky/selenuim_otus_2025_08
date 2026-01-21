@@ -31,5 +31,4 @@ def test_add_product_scenario(browser):
     admin_page_catalog.click_product_delete()
     admin_page_catalog.click_close_action_modale()
     alert = admin_page_catalog.check_delete_success_alert()
-    assert "Successful deletion" in alert.text, \
-        "Продукт не был удалён."
+    assert "Successful deletion" in alert.text, "Продукт не был удалён."
