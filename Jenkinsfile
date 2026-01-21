@@ -12,18 +12,22 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                echo 'Клонирование репозитория...'
                 checkout scm
             }
         }
 
         stage('Prepare Environment') {
             steps {
+                echo 'Запуск сервисов через Docker Compose...'
+                sh 'docker-compose down -v || true'
                 sh 'docker compose up -d db prestashop'
             }
         }
 
         stage('Run Tests') {
             steps {
+                echo 'Запуск тестов из контейнера через Docker Compose...'
                 withCredentials([usernamePassword(
                     credentialsId: 'PRESTASHOP_ADMIN_CREDS', 
                     usernameVariable: 'EXTRACTED_EMAIL', 
@@ -54,9 +58,11 @@ pipeline {
                                 "
                             """
                         } finally {
-                            echo "Copying allure results from container..."
+                            echo "Копирование allure results из контейнера..."
                             sh "docker cp ${testContainer}:/app/allure-results/. ./allure-results/ || true"
+                            echo "Удаляем контейнер с тестами, останавливаем сервисы..."
                             sh "docker rm -f ${testContainer} || true"
+                            sh "docker-compose down -v || true"
                         }
                     }
                 }
