@@ -17,20 +17,14 @@ pipeline {
             }
         }
 
-        stage('Setup') {
-            steps {
-                echo 'Установка зависимостей...'
-                sh 'python3 -m venv venv'
-                sh 'venv/bin/pip install --upgrade pip'
-                sh 'venv/bin/pip install -r requirements.txt'
-            }
-        }
-    
     stage('Linting') {
         steps {
             script {
                 echo "Проверка линтером Ruff..."
+                sh 'python3 -m venv venv'
+                sh 'venv/bin/pip install ruff'
                 sh 'venv/bin/ruff check .'
+                sh 'rm -rf venv'
             }
         }
     }    
