@@ -22,8 +22,8 @@ pipeline {
             script {
                 echo "Проверка линтером Ruff..."
                 sh 'python3 -m venv venv'
-                sh 'venv/bin/pip install ruff'
-                sh 'venv/bin/ruff check .'
+                sh '.venv/bin/pip install ruff'
+                sh '.venv/bin/ruff check .'
                 sh 'rm -rf venv'
             }
         }
