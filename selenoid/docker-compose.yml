@@ -1,0 +1,82 @@
+version: "3.9"
+
+services:
+  selenoid1:
+    image: aerokube/selenoid:1.11.3
+    container_name: selenoid1
+    hostname: selenoid1
+    networks:
+      - selenoid1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/zanev/develop/selenoid/browsers.json:/etc/selenoid/browsers.json:ro
+    command: -container-network selenoid1 -limit 10
+
+  selenoid2:
+    image: aerokube/selenoid:1.11.3
+    container_name: selenoid2
+    hostname: selenoid2
+    networks:
+      - selenoid1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/zanev/develop/selenoid/browsers.json:/etc/selenoid/browsers.json:ro
+    command: -container-network selenoid1 -limit 10
+
+  ggr:
+    image: aerokube/ggr:1.7.2
+    container_name: ggr
+    hostname: ggr
+    networks:
+      - selenoid1
+      - selenoid2
+    depends_on:
+      - selenoid1
+      - selenoid2
+    command: -guests-allowed -guests-quota "test" -verbose
+    volumes:
+      - /home/zanev/develop/selenoid/ggr/quota:/etc/grid-router/quota:ro
+
+  ggr_ui:
+    image: aerokube/ggr-ui:1.2.0
+    container_name: ggr_ui
+    hostname: ggr_ui
+    networks:
+      - selenoid1
+      - selenoid2
+    depends_on:
+      - ggr
+    volumes: 
+      - /home/zanev/develop/selenoid/ggr/quota:/etc/grid-router/quota:ro
+
+  selenoid_ui:
+    image: aerokube/selenoid-ui:1.10.11
+    container_name: selenoid_ui
+    hostname: selenoid_ui
+    depends_on: 
+      - ggr_ui
+    networks:
+      - selenoid1
+    command: --selenoid-uri http://ggr_ui:8888
+
+  nginx:
+    image: nginx:1.29
+    container_name: nginx
+    hostname: nginx
+    depends_on: 
+      - selenoid_ui
+      - ggr
+    ports: 
+      - 80:80
+    volumes: 
+      - /home/zanev/develop/selenoid/nginx:/etc/nginx/conf.d:ro
+    networks:
+      - selenoid1  
+
+networks: 
+  selenoid1:
+    name: selenoid1
+    external: true
+  selenoid2:
+    name: selenoid2
+    external: true    

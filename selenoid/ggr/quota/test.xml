@@ -1,0 +1,19 @@
+<qa:browsers>
+    <browser name="chrome" defaultVersion="128.0">
+            <version number="128.0">
+                    <region name="1">
+                        <host name="selenoid1" port="4444" count="1"/>
+                         <host name="selenoid2" port="4444" count="1"/>
+                    </region>
+            </version>
+    </browser>
+
+    <browser name="firefox" defaultVersion="125.0">
+            <version number="125.0">
+                    <region name="1">
+                        <host name="selenoid1" port="4444" count="1"/>
+                        <host name="selenoid2" port="4444" count="1"/>
+                    </region>
+            </version>
+    </browser>    
+</qa:browsers>                       
