@@ -47,6 +47,7 @@ class CatalogPage(BasePage):
         self.wait_title(self.TITLE)
 
     allure_attach_on_fail
+
     @log_action
     @allure_step("Проверить наличие выбора категорий каталога")
     def check_categories_links(self):

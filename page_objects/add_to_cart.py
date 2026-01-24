@@ -40,11 +40,3 @@ class AddToCart(BasePage):
     def get_product_name_in_cart(self):
         product_in_cart = self.wait_element(self.PRODUCT_NAME_IN_CART)
         return product_in_cart.text.strip().lower()
-
-
-
-
-
-
-
-

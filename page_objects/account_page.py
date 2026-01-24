@@ -26,16 +26,12 @@ class AccountInfoPage(BasePage):
             selector = self.FIELDS_MAP[field_name.lower()]
         except KeyError:
             raise ValueError(f"Неизвестное поле: '{field_name}'")
-        FIELD_LOCATOR = (selector)
+        FIELD_LOCATOR = selector
         field_element = self.wait_element(FIELD_LOCATOR)
         actual_value = field_element.get_attribute("value")
         if actual_value == expected_value:
             print(f"Проверка успешна: Поле '{field_name}' содержит ожидаемое значение '{expected_value}'.")
         else:
             raise AssertionError(
-                f"Ошибка проверки поля '{field_name}'. "
-                f"Ожидалось: '{expected_value}', Фактическое: '{actual_value}'"
+                f"Ошибка проверки поля '{field_name}'. Ожидалось: '{expected_value}', Фактическое: '{actual_value}'"
             )
-
-
-

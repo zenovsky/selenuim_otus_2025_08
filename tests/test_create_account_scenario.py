@@ -34,6 +34,3 @@ def test_create_account_scenario(browser):
     account_info.verify_field_value("firstname", user_data["firstname"])
     account_info.verify_field_value("lastname", user_data["lastname"])
     account_info.verify_field_value("email", user_data["email"])
-
-
-

@@ -18,7 +18,7 @@ class AdminCatalogProductsPage(BasePage):
     MODAL_BULK_ACTION_CLOSE_BUTTON = ".btn.btn-primary.btn-lg.close-modal-button"
     PRODUCT_DELETE_SUCCESS_ALERT = (By.XPATH, "//div[@class='alert-text']/p[contains(text(), 'Successful deletion')]")
     PRODUCT_HEADER_NAME = "#product_header_name_1"
-    PRODUCT_PRICING_TAB= "#product_pricing-tab-nav"
+    PRODUCT_PRICING_TAB = "#product_pricing-tab-nav"
     RETAIL_PRICE_INPUT = "#product_pricing_retail_price_price_tax_excluded"
     PRODUCT_SAVE_BUTTON = "#product_footer_save"
     PRODUCT_ADD_SUCCESS_ALERT = (By.XPATH, "//div[@class='alert-text']/p[contains(text(), 'Successful update')]")
@@ -140,8 +140,3 @@ class AdminCatalogProductsPage(BasePage):
     def check_success_alert(self):
         by, selector = self.PRODUCT_ADD_SUCCESS_ALERT
         return self.wait_element(selector, by=by)
-
-
-
-
-

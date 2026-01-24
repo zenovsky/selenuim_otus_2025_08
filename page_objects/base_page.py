@@ -29,9 +29,7 @@ class BasePage:
     @log_action
     def wait_element(self, selector, timeout=10, by=By.CSS_SELECTOR):
         try:
-            return WebDriverWait(self.driver, timeout).until(
-                EC.visibility_of_element_located((by, selector))
-            )
+            return WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located((by, selector)))
         except TimeoutException:
             raise AssertionError(f"Не дождался видимости элемента: {selector}")
 

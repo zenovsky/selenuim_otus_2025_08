@@ -12,6 +12,7 @@ def test_admin_login_title(browser):
     admin_login.open_admin_login()
     admin_login.check_admin_login_title()
 
+
 @allure.epic("Страница логина администратора")
 @allure.feature("Загрузка страницы логина администратора")
 @allure.story("Проверка отображения кнопки 'Оставаться в системе'")
@@ -20,6 +21,7 @@ def test_admin_stay_login(browser):
     admin_login = AdminLoginPage(browser)
     admin_login.open_admin_login()
     admin_login.check_login_stay_checkbox()
+
 
 @allure.epic("Страница логина администратора")
 @allure.feature("Загрузка страницы логина администратора")

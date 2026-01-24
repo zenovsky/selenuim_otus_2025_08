@@ -12,6 +12,7 @@ def test_product_title(browser):
     product_card.open_card()
     product_card.check_title_product_card()
 
+
 @allure.epic("Карточка товара")
 @allure.feature("Загрузка страницы карточки товара")
 @allure.story("Проверка изображения товара")
@@ -21,6 +22,7 @@ def test_product_card_image(browser):
     product_card.open_card()
     product_card.check_product_card_image()
 
+
 @allure.epic("Карточка товара")
 @allure.feature("Загрузка страницы карточки товара")
 @allure.story("Проверка отображения веб-элементов страницы карточки товара")
@@ -29,6 +31,7 @@ def test_product_card_css_elements_present(browser):
     product_card = ProductCardPage(browser)
     product_card.open_card()
     product_card.check_css_elements()
+
 
 @allure.epic("Карточка товара")
 @allure.feature("Покупка товара")

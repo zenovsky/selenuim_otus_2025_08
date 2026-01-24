@@ -12,6 +12,7 @@ def test_main_title(browser):
     main_page.open_main()
     main_page.check_title_main()
 
+
 @allure.epic("Главная страница")
 @allure.feature("Загрузка главной страницы")
 @allure.story("Проверка отображения элементов хэдера")
@@ -20,6 +21,7 @@ def test_header_elements(browser):
     main_page = MainPage(browser)
     main_page.open_main()
     main_page.check_header_elements()
+
 
 @allure.epic("Главная страница")
 @allure.feature("Загрузка главной страницы")
@@ -30,6 +32,7 @@ def test_products(browser):
     main_page.open_main()
     main_page.check_product_blocks()
 
+
 @allure.epic("Главная страница")
 @allure.feature("Загрузка главной страницы")
 @allure.story("Проверка отображения основных блоков на главной странице")
@@ -38,6 +41,7 @@ def test_key_blocks(browser):
     main_page = MainPage(browser)
     main_page.open_main()
     main_page.check_key_blocks()
+
 
 @allure.epic("Главная страница")
 @allure.feature("Загрузка главной страницы")
